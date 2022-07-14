@@ -27,7 +27,6 @@
     "types": "./dist/index.d.ts"
   },
   "scripts": {
-    "postinstall": "patch-package",
     "compile": "yarn rollup --config",
     "lint": "eslint \"src/**/*.{tsx,ts}\"",
     "check-typing": "tsc --noEmit"

@@ -27,6 +27,7 @@
     "types": "./dist/index.d.ts"
   },
   "scripts": {
+    "postinstall": "patch-package",
     "compile": "yarn rollup --config",
     "lint": "eslint \"src/**/*.{tsx,ts}\"",
     "check-typing": "tsc --noEmit"
@@ -35,6 +36,8 @@
     "@trong-orm/core": "^1.1.6",
     "@trong-orm/sql": "^1.1.6",
     "@trong-orm/sql.js": "^1.6.7",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
     "rxjs": "^7.5.5",
     "wa-sqlite": "rhashimoto/wa-sqlite#buildless"
   },

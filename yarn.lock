@@ -1191,9 +1191,9 @@
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
 
 "@trong-orm/common-scripts@*":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/common-scripts/-/common-scripts-1.2.0.tgz#2c5bf93c8ec94c70ce404d684fa782ed70068bfe"
-  integrity sha512-zgVv+R2v9MSSUuoW2wVSP1Wc3Egb4rCoaECeRgT8w7Oh2DRedotjmC8kmLqUT0+tghsGELJOuxq0EUVN1myTfg==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@trong-orm/common-scripts/-/common-scripts-1.2.1.tgz#f477c96d962ccc542935566745c8b4031084b0f4"
+  integrity sha512-xj/3FPa4U6ds+N+aLrwXnzLTNIRuc0Oqx8P0fZgm6RI0C/3PU47GRb8C3WLV86so6Tdr/zVSpPpuMDG7c9TG1g==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.30.5"
     eslint "^8.19.0"

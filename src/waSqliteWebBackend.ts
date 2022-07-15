@@ -64,6 +64,7 @@ export const waSqliteWebBackend =
           `PRAGMA page_size=${pageSize === undefined ? 32 * 1024 : pageSize};`
         );
         await sqlite3.exec(db, `PRAGMA journal_mode=MEMORY;`);
+        await sqlite3.exec(db, `PRAGMA temp_store=MEMORY;`);
 
         // TODO: race condition on close may happen
         stopped$.subscribe(() => {

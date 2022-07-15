@@ -5,73 +5,110 @@ import {
   makeId,
   migrationsPlugin,
   reactiveQueriesPlugin,
-  runInTransaction,
   useDbStrict,
 } from "@trong-orm/react";
-import { IMigration, runQuery, sql } from "@trong-orm/react";
+import { runQuery, sql } from "@trong-orm/react";
+import { chunk } from "lodash-es";
 import React, { useCallback } from "react";
 import ReactDOM from "react-dom/client";
 import sqlWasmUrl from "wa-sqlite/dist/wa-sqlite-async.wasm?url";
 
 import { waSqliteWebBackend } from "../src";
+import { generateRootTree } from "./generateTree";
+
+const { allRems, rootId: rootRemId } = generateRootTree({
+  depth: 1,
+  childrenInRow: () => 50000,
+});
 
 const App = () => {
   const db = useDbStrict();
   const runInserts = useCallback(async () => {
-    const ids = [...Array(1000)].map(() => makeId());
+    for (const chunkedRems of chunk(allRems, 10_000)) {
+      await runQuery(
+        db,
+        insert(
+          chunkedRems.map((r) => ({ _id: r._id, doc: JSON.stringify(r) }))
+        ).into("jsonRems")
+      );
+    }
+  }, [db]);
 
+  const runUpdates = useCallback(async () => {
     await runQuery(
       db,
-      insert(ids.map((id) => ({ id, val: Math.random() }))).into("notes")
+      update("jsonRems").set({
+        doc: sql`json_set(doc, '$.a', ${makeId()})`,
+      })
     );
+  }, [db]);
 
-    await runInTransaction(db, async (db) => {
-      for (const id of ids) {
-        await runQuery(
-          db,
-          update("notes").set({ val: Math.random() }).where({ id })
-        );
-
-        console.log(await runQuery(db, select().from("notes").limit(10)));
-      }
-    });
-
-    console.log(await runQuery(db, select().from("notes")));
+  const runSelects = useCallback(async () => {
+    (
+      await runQuery<{ _id: string; doc: string }>(
+        db,
+        select()
+          .withRecursive({
+            table: "descendantRems",
+            columns: ["_id", "doc"],
+            select: select("jsonRems._id", "jsonRems.doc")
+              .from("jsonRems")
+              .where({ _id: rootRemId })
+              .unionAll(
+                select("jsonRems._id", "jsonRems.doc")
+                  .from(
+                    "descendantRems",
+                    sql`json_each("descendantRems"."doc", '$.childrenIds')`
+                  )
+                  .join("jsonRems", {
+                    "jsonRems._id": sql`json_each.value`,
+                  })
+              ),
+          })
+          .from("descendantRems")
+      )
+    ).map(({ doc }) => JSON.parse(doc));
   }, [db]);
 
   return (
     <div>
       <button onClick={runInserts}>Run inserts</button>
+      <button onClick={runUpdates}>Run updated</button>
+      <button onClick={runSelects}>Run selects</button>
     </div>
   );
-};
-
-const createNotesTableMigration: IMigration = {
-  up: async (db) => {
-    await runQuery(
-      db,
-      sql`
-      CREATE TABLE notes (
-        id varchar(20) PRIMARY KEY,
-        val REAL NOT NULL
-      );
-    `
-    );
-  },
-  id: 18,
-  name: "createNotesTable",
 };
 
 const config = {
   dbName: "helloWorld",
   dbBackend: waSqliteWebBackend({
     wasmUrl: sqlWasmUrl,
-    pageSize: 2 * 1024,
-    cacheSize: 0,
+    pageSize: 64 * 1024,
+    cacheSize: -10000,
     vfs: "minimal",
   }),
   plugins: [
-    migrationsPlugin({ migrations: [createNotesTableMigration] }),
+    migrationsPlugin({
+      migrations: [
+        {
+          up: async (db) => {
+            await runQuery(
+              db,
+              sql`
+                CREATE TABLE IF NOT EXISTS jsonRems (
+                  _id TEXT NOT NULL PRIMARY KEY,
+                  doc TEXT
+                );
+                  `
+            );
+
+            await runQuery(db, sql`CREATE INDEX jsonRems_id ON jsonRems(_id);`);
+          },
+          id: 1000,
+          name: "createRemJson",
+        },
+      ],
+    }),
     reactiveQueriesPlugin(),
   ],
 };

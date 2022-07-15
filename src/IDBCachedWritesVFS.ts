@@ -54,6 +54,7 @@ export class IDCachedWritesVFS extends VFS.Base {
     return this.handleAsync(async () => {
       if (name === null) name = `null_${fileId}`;
 
+      console.warn("...opening", name);
       this.dbNameFileIdMap.set(name, fileId);
 
       const db = new IDBContext(openDatabase(name), {
@@ -237,10 +238,12 @@ export class IDCachedWritesVFS extends VFS.Base {
 
           const idb = await db.dbReady;
 
-          // @ts-expect-error lib dom misses third argument
-          const tx = idb.transaction("blocks", "readwrite", {
-            durability: "relaxed",
-          });
+          const tx =
+            db.tx ||
+            // @ts-expect-error lib dom misses third argument
+            idb.transaction("blocks", "readwrite", {
+              durability: "relaxed",
+            });
 
           tx.oncomplete = () => {
             this.cursors.delete(fileId);

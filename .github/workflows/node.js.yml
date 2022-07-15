@@ -26,5 +26,6 @@ jobs:
         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
     - run: yarn
     - run: yarn lint
+    - run: yarn patch-package
     - run: yarn check-typing
 

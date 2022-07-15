@@ -7,8 +7,6 @@ function log(...args: unknown[]) {
   // console.debug(...args);
 }
 
-const blockSize = 32 * 1024;
-
 type IOptions = {
   durability: "default" | "strict" | "relaxed";
 };
@@ -20,10 +18,14 @@ interface IBlock {
   data: Int8Array;
 }
 
+interface IZeroFileBlock extends IBlock {
+  fileSize: number;
+}
+
 interface IOpenedFile {
   path: string;
   flags: number;
-  fileSize: number;
+  block0: IZeroFileBlock;
 }
 
 export class IDCachedWritesVFS extends VFS.Base {
@@ -62,10 +64,37 @@ export class IDCachedWritesVFS extends VFS.Base {
       try {
         // Filenames can be URLs, possibly with query parameters.
         const url = new URL(name, "file://localhost/");
-        const file = {
+        const file: IOpenedFile = {
           path: url.pathname,
           flags,
-          fileSize: 0,
+          block0: await (async () => {
+            const res = await db.run("readonly", ({ blocks }) =>
+              blocks.get(this.bound(0))
+            );
+
+            if (!res) {
+              // File doesn't exist, create if requested.
+              if (flags & VFS.SQLITE_OPEN_CREATE) {
+                const block0 = {
+                  offset: 0,
+                  data: new Int8Array(0),
+                  fileSize: 0,
+                };
+
+                // Write metadata block to IndexedDB.
+                await db.run("readwrite", ({ blocks }) =>
+                  blocks.put(block0, 0)
+                );
+                await db.sync();
+
+                return block0;
+              } else {
+                throw new Error(`file not found: ${name}`);
+              }
+            } else {
+              return res;
+            }
+          })(),
         };
 
         this.filesState.set(fileId, {
@@ -73,23 +102,8 @@ export class IDCachedWritesVFS extends VFS.Base {
           db,
         });
 
-        // Read the last block to get the file size.
-        const lastBlock = await db.run("readonly", ({ blocks }) => {
-          return blocks.get(this.bound(-Infinity));
-        });
-        if (lastBlock) {
-          file.fileSize = lastBlock.data.length - lastBlock.offset;
-        } else if (flags & VFS.SQLITE_OPEN_CREATE) {
-          const block: IBlock = {
-            offset: 0,
-            data: new Int8Array(0),
-          };
-
-          await db.run("readwrite", ({ blocks }) => blocks.put(block));
-        } else {
-          throw new Error(`file not found: ${file.path}`);
-        }
         pOutFlags.set(flags & VFS.SQLITE_OPEN_READONLY);
+
         return VFS.SQLITE_OK;
       } catch (e) {
         console.error(e);
@@ -137,10 +151,13 @@ export class IDCachedWritesVFS extends VFS.Base {
     return this.handleAsync(async () => {
       // TODO: not sure why, but if is not in handleAsync then code called twice.
       // Is it stack unwind/rewind?
-      const { db } = this.getFileStateByIdOrThrow(fileId);
+      const { db, file } = this.getFileStateByIdOrThrow(fileId);
+
+      log(`xRead ${file.path} ${pData.value.length} ${iOffset}`);
 
       const filePendingWrites = this.pendingWrites.get(fileId);
       const block = filePendingWrites?.get(iOffset);
+      const blockSize = file.block0.data.length;
 
       if (block) {
         pData.value.set(block.data);
@@ -148,7 +165,7 @@ export class IDCachedWritesVFS extends VFS.Base {
         return VFS.SQLITE_OK;
       }
 
-      const dir = this.getReadDirection(fileId);
+      const dir = this.getReadDirection(fileId, blockSize);
 
       const waitCursor = async () => {
         const block = await new Promise<IBlock>((resolve, reject) => {
@@ -183,20 +200,16 @@ export class IDCachedWritesVFS extends VFS.Base {
       if (cursor) {
         const key = cursor.key as number;
         // console.log({ key });
+
         if (
-          cursor.direction === "next" &&
-          key < -iOffset &&
-          -iOffset < key + 100 * blockSize
+          (cursor.direction === "next" &&
+            key < -iOffset &&
+            -iOffset < key + 100 * blockSize) ||
+          (cursor.direction === "prev" &&
+            key - 100 * blockSize < -iOffset &&
+            -iOffset < key)
         ) {
           cursor.advance(Math.abs(Math.ceil((-iOffset - key) / blockSize)));
-
-          return waitCursor();
-        } else if (
-          cursor.direction === "prev" &&
-          key - 100 * blockSize < -iOffset &&
-          -iOffset < key
-        ) {
-          cursor.advance(Math.abs(Math.ceil((-key - iOffset) / blockSize)));
 
           return waitCursor();
         } else {
@@ -231,6 +244,8 @@ export class IDCachedWritesVFS extends VFS.Base {
           const blocksStore = tx.objectStore("blocks");
 
           const req = blocksStore.openCursor(keyRange, dir);
+
+          // console.warn("OPEN CURSOR", -iOffset, dir);
 
           req.onsuccess = (e) => {
             let cursor: IDBCursorWithValue = (e.target as any).result;
@@ -269,8 +284,6 @@ export class IDCachedWritesVFS extends VFS.Base {
         }
       }
 
-      // console.log(`xRead ${file.path} ${pData.value.length} ${iOffset}`);
-
       try {
         const block: IBlock = await db.run("readonly", ({ blocks }) => {
           return blocks.get(this.bound(-iOffset));
@@ -300,7 +313,7 @@ export class IDCachedWritesVFS extends VFS.Base {
   // The ideas is taken from absurd-sql. Very smart!
   // Also this might be helpful https://nolanlawson.com/2021/08/22/speeding-up-indexeddb-reads-and-writes/
   private prevReads: Map<number, [number, number, number]> = new Map();
-  private getReadDirection(fileId: number) {
+  private getReadDirection(fileId: number, blockSize: number) {
     // There are a two ways we can read data: a direct `get` request
     // or opening a cursor and iterating through data. We don't know
     // what future reads look like, so we don't know the best strategy
@@ -357,36 +370,53 @@ export class IDCachedWritesVFS extends VFS.Base {
     },
     iOffset: number
   ) {
-    const { file, db } = this.getFileStateByIdOrThrow(fileId);
+    return this.handleAsync(async () => {
+      const { file, db } = this.getFileStateByIdOrThrow(fileId);
 
-    log(`xWrite ${file.path} ${pData.value.length} ${iOffset}`);
+      log(`xWrite ${file.path} ${pData.value.length} ${iOffset}`);
 
-    try {
-      // Convert the write directly into an IndexedDB object.
-      const block: IBlock = {
-        offset: -iOffset,
-        data: pData.value.slice(),
-      };
+      try {
+        // Convert the write directly into an IndexedDB object.
+        const block: IBlock = {
+          offset: -iOffset,
+          data: pData.value.slice(),
+        };
 
-      const filePendingWrites = this.pendingWrites.get(fileId);
+        file.block0.fileSize = Math.max(
+          file.block0.fileSize,
+          iOffset + pData.value.length
+        );
 
-      if (filePendingWrites) {
-        filePendingWrites.set(iOffset, block);
+        if (iOffset === 0) {
+          file.block0.data = pData.value.slice();
+        }
+
+        const filePendingWrites = this.pendingWrites.get(fileId);
+        if (filePendingWrites) {
+          if (iOffset === 0) {
+            filePendingWrites.set(0, file.block0);
+          } else {
+            filePendingWrites.set(iOffset, block);
+          }
+
+          return VFS.SQLITE_OK;
+        }
+
+        // console.log("put", block, block.offset);
+        await db.run("readwrite", async ({ blocks }) => {
+          if (iOffset === 0) {
+            await blocks.put(file.block0, 0);
+          } else {
+            await blocks.put(block, block.offset);
+          }
+        });
 
         return VFS.SQLITE_OK;
+      } catch (e) {
+        console.error(e);
+        return VFS.SQLITE_IOERR;
       }
-
-      void (async () => {
-        file.fileSize = Math.max(file.fileSize, iOffset + pData.value.length);
-
-        await db.run("readwrite", ({ blocks }) => blocks.put(block));
-      })();
-
-      return VFS.SQLITE_OK;
-    } catch (e) {
-      console.error(e);
-      return VFS.SQLITE_IOERR;
-    }
+    });
   }
 
   xTruncate(fileId: number, iSize: number) {
@@ -395,18 +425,19 @@ export class IDCachedWritesVFS extends VFS.Base {
     log(`xTruncate ${file.path} ${iSize}`);
 
     try {
-      file.fileSize = iSize;
+      const block: IZeroFileBlock = {
+        offset: 0,
+        data: new Int8Array(0),
+        fileSize: 0,
+      };
+      file.block0 = block;
 
       void db.run("readwrite", async ({ blocks }) => {
         await blocks.delete(this.bound(-Infinity, -iSize));
-        if (iSize === 0) {
-          const block: IBlock = {
-            offset: 0,
-            data: new Int8Array(0),
-          };
-          await blocks.put(block);
-        }
+
+        await blocks.put(block, 0);
       });
+
       return VFS.SQLITE_OK;
     } catch (e) {
       console.error(e);
@@ -444,7 +475,9 @@ export class IDCachedWritesVFS extends VFS.Base {
 
     log(`xFileSize ${file.path}`);
 
-    pSize64.set(file.fileSize);
+    // console.log(file.block0.fileSize);
+
+    pSize64.set(file.block0.fileSize);
     return VFS.SQLITE_OK;
   }
 
@@ -460,12 +493,14 @@ export class IDCachedWritesVFS extends VFS.Base {
 
       try {
         const result = await this.webLocks.lock(file.path, flags);
+
         if (result === VFS.SQLITE_OK && flags === VFS.SQLITE_LOCK_SHARED) {
-          // Update cached file size when lock is acquired.
-          const lastBlock = await db.run("readonly", ({ blocks }) => {
-            return blocks.get(this.bound(-Infinity));
-          });
-          file.fileSize = lastBlock.data.length - lastBlock.offset;
+          // console.log(file.block0);
+          // Update block 0 in case another connection changed it.
+          file.block0 = await db.run("readonly", ({ blocks }) =>
+            blocks.get(this.bound(0))
+          );
+          // console.log(file.block0);
         }
 
         return result;
@@ -485,7 +520,7 @@ export class IDCachedWritesVFS extends VFS.Base {
       const filePendingWrites = this.pendingWrites.get(fileId);
 
       if (filePendingWrites && filePendingWrites.size > 0) {
-        console.time("writing bulk");
+        // console.time("writing bulk");
 
         // void db.run("readwrite", async ({ blocks }) => {
         //   for (const block of filePendingWrites.values()) {
@@ -505,7 +540,7 @@ export class IDCachedWritesVFS extends VFS.Base {
           const blocksStore = tx.objectStore("blocks");
 
           for (const v of filePendingWrites.values()) {
-            blocksStore.put(v);
+            blocksStore.put(v, v.offset);
           }
 
           tx.addEventListener("complete", () => {
@@ -515,7 +550,7 @@ export class IDCachedWritesVFS extends VFS.Base {
           tx.addEventListener("error", reject);
         });
 
-        console.timeEnd("writing bulk");
+        // console.timeEnd("writing bulk");
       }
 
       this.pendingWrites.delete(fileId);
@@ -577,7 +612,7 @@ export class IDCachedWritesVFS extends VFS.Base {
   }
 
   txFileControl(fileId: number, op: number) {
-    console.debug("xFileControl", fileId, op);
+    // console.debug("xFileControl", fileId, op);
 
     return VFS.SQLITE_NOTFOUND;
   }
@@ -610,9 +645,7 @@ function openDatabase(idbDatabaseName: string) {
   return new Promise<IDBDatabase>((resolve, reject) => {
     const request = globalThis.indexedDB.open(`${idbDatabaseName}.sqlite`, 1);
     request.addEventListener("upgradeneeded", () => {
-      request.result.createObjectStore("blocks", {
-        keyPath: "offset",
-      });
+      request.result.createObjectStore("blocks");
     });
     request.addEventListener("success", () => {
       resolve(request.result);

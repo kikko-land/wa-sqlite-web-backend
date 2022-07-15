@@ -16,7 +16,7 @@ export class IDBContext {
   public dbReady: Promise<IDBDatabase>;
   private txOptions: { durability: string };
 
-  private tx: IDBTransaction | undefined;
+  public tx: IDBTransaction | undefined;
   private txComplete: Promise<void> | undefined;
   private request: IDBRequest | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

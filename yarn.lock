@@ -1293,12 +1293,7 @@
   resolved "https://registry.yarnpkg.com/@trong-orm/sql.js/-/sql.js-1.6.7.tgz#7586a7513f7bf2d48173876e630f0e083cfbc2c5"
   integrity sha512-A9Yz/EdUPzic2c1vcOllwCh7RJ7otsBfp9xsEqvpByKyKUVTXZHSwfnRYSApmwL5ferRXlNcz9iAKMKnQjO6DQ==
 
-"@trong-orm/sql@^1.1.6", "@trong-orm/sql@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/sql/-/sql-1.2.0.tgz#cb9b6832562ffc57f2e131039798ae354a71bb41"
-  integrity sha512-BwLC7pQSL0C5hSprjUb90iv8tJU19MC5M+UkHnalDYUSLZ6vlkOftwpCvYSZsRN+ij6ghRk+vF+gGxIIMb2VzQ==
-
-"@trong-orm/sql@^1.2.1":
+"@trong-orm/sql@^1.2.0", "@trong-orm/sql@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@trong-orm/sql/-/sql-1.2.1.tgz#aff0d12e2d3f8efae97a80f8149c0644a9f1174b"
   integrity sha512-D/SFC68RTvO2+vXWrc8Hc9p5p9SEspNc9nu3JGPo3M6ZpQzCwNgsFdLVIGdQY4ZoLSCS9wwkErEosBHMRqUoyg==

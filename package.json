@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@trong-orm/core": "^1.1.6",
-    "@trong-orm/sql": "^1.1.6",
+    "@trong-orm/sql": "^1.2.1",
     "@trong-orm/sql.js": "^1.6.7",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",

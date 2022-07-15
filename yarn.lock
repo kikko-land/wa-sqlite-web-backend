@@ -1214,16 +1214,6 @@
     ts-node "^10.8.2"
     typescript "^4.7.4"
 
-"@trong-orm/core@^1.1.6":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/core/-/core-1.2.0.tgz#5d512953bd154ad1c5dba7aab3574adec8098976"
-  integrity sha512-X85AL8TiowlLMS0PaOoh3M/Y4daoB4MbDLTZvEVWqU/VV1tIgJblv35YfPCav4nGlDqF1mDIH3iOcuG9Smqz9Q==
-  dependencies:
-    "@trong-orm/query-builder" "^1.2.0"
-    "@trong-orm/sql" "^1.2.0"
-    rxjs "^7.5.5"
-    ts-essentials "^9.1.2"
-
 "@trong-orm/core@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@trong-orm/core/-/core-1.2.1.tgz#578752b46806ab30f6d3a6698e62315161e16504"
@@ -1241,13 +1231,6 @@
   dependencies:
     "@trong-orm/core" "^1.2.1"
     "@trong-orm/sql" "^1.2.1"
-
-"@trong-orm/query-builder@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/query-builder/-/query-builder-1.2.0.tgz#0b647bf8981c7972dadf133488d8de151f74a02a"
-  integrity sha512-N9aB2nCZCW1RZTXd69VaGDLQEIFxPiS7mmE04ekMSLQplHS6QI780eO9NeLtqQL8wgvs6Tizf9zD9NeFGIBuUQ==
-  dependencies:
-    "@trong-orm/sql" "^1.2.0"
 
 "@trong-orm/query-builder@^1.2.1":
   version "1.2.1"
@@ -1293,12 +1276,7 @@
   resolved "https://registry.yarnpkg.com/@trong-orm/sql.js/-/sql.js-1.6.7.tgz#7586a7513f7bf2d48173876e630f0e083cfbc2c5"
   integrity sha512-A9Yz/EdUPzic2c1vcOllwCh7RJ7otsBfp9xsEqvpByKyKUVTXZHSwfnRYSApmwL5ferRXlNcz9iAKMKnQjO6DQ==
 
-"@trong-orm/sql@^1.1.6", "@trong-orm/sql@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/sql/-/sql-1.2.0.tgz#cb9b6832562ffc57f2e131039798ae354a71bb41"
-  integrity sha512-BwLC7pQSL0C5hSprjUb90iv8tJU19MC5M+UkHnalDYUSLZ6vlkOftwpCvYSZsRN+ij6ghRk+vF+gGxIIMb2VzQ==
-
-"@trong-orm/sql@^1.2.1":
+"@trong-orm/sql@^1.1.6", "@trong-orm/sql@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@trong-orm/sql/-/sql-1.2.1.tgz#aff0d12e2d3f8efae97a80f8149c0644a9f1174b"
   integrity sha512-D/SFC68RTvO2+vXWrc8Hc9p5p9SEspNc9nu3JGPo3M6ZpQzCwNgsFdLVIGdQY4ZoLSCS9wwkErEosBHMRqUoyg==

@@ -66,8 +66,8 @@ const config = {
   dbName: "helloWorld",
   dbBackend: waSqliteWebBackend({
     wasmUrl: sqlWasmUrl,
-    pageSize: 8 * 1024,
-    cacheSize: -5000,
+    pageSize: 2 * 1024,
+    cacheSize: 0,
     vfs: "minimal",
   }),
   plugins: [

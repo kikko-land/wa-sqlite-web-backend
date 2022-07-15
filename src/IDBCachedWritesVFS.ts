@@ -13,6 +13,7 @@ type IOptions = {
 
 const DEFAULT_OPTIONS: IOptions = { durability: "default" };
 
+// TODO: refactor that IBlock === Int8Array
 interface IBlock {
   offset: number;
   data: Int8Array;
@@ -240,6 +241,10 @@ export class IDCachedWritesVFS extends VFS.Base {
           const tx = idb.transaction("blocks", "readwrite", {
             durability: "relaxed",
           });
+
+          tx.oncomplete = () => {
+            this.cursors.delete(fileId);
+          };
 
           const blocksStore = tx.objectStore("blocks");
 

@@ -4466,7 +4466,8 @@ vite@^3.0.0:
 
 wa-sqlite@rhashimoto/wa-sqlite#buildless:
   version "0.7.1"
-  resolved "https://codeload.github.com/rhashimoto/wa-sqlite/tar.gz/17d62610e98800b5c86b47352c0b45d860982ed2"
+  uid d524d718c6436a123d669934b11254a8a3c74730
+  resolved "https://codeload.github.com/rhashimoto/wa-sqlite/tar.gz/d524d718c6436a123d669934b11254a8a3c74730"
 
 wcwidth@^1.0.1:
   version "1.0.1"

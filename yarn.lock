@@ -1135,6 +1135,97 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@kikko-land/common-scripts@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/common-scripts/-/common-scripts-0.1.1.tgz#09856285f71240142937a02d793af8b358d8a695"
+  integrity sha512-wc1Ph6UIiKP+MpQXGDbYJp+jVAO7KkPh+AL0EcvhdqwcQyf80myOmTtzQoKlRkq6LOjaVmqefXiqF4hshgYkrw==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^5.30.5"
+    eslint "^8.19.0"
+    eslint-config-airbnb "^19.0.4"
+    eslint-config-prettier "^8.5.0"
+    eslint-config-react-app "^7.0.1"
+    eslint-plugin-flowtype "^8.0.3"
+    eslint-plugin-import "^2.26.0"
+    eslint-plugin-jsx-a11y "^6.6.0"
+    eslint-plugin-prettier "^4.0.0"
+    eslint-plugin-promise "^6.0.0"
+    eslint-plugin-react "^7.30.0"
+    eslint-plugin-react-hooks "^4.6.0"
+    eslint-plugin-rxjs "^5.0.2"
+    eslint-plugin-simple-import-sort "^7.0.0"
+    inquirer "^9.0.0"
+    rollup-plugin-auto-external "^2.0.0"
+    ts-node "^10.8.2"
+    typescript "^4.7.4"
+
+"@kikko-land/core@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/core/-/core-0.1.1.tgz#28a45f826838fb63d48a0c1351178b498ac69f52"
+  integrity sha512-H+UOmr4Sfq7zLLeFHFCKMQPzRGKJ0KNWfpLKeltqIUbO0u4NOtohZXUC5Gm94vFk+GprpZA6i9UChfDrjZ/srQ==
+  dependencies:
+    "@kikko-land/query-builder" "^0.1.1"
+    "@kikko-land/sql" "^0.1.1"
+    rxjs "^7.5.5"
+    ts-essentials "^9.1.2"
+
+"@kikko-land/migrations-plugin@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/migrations-plugin/-/migrations-plugin-0.1.1.tgz#b329aa60a4677dba4dd1c6292ac69f34ed0a9bd2"
+  integrity sha512-WQSYmvECK9UoqeXQG8ZaD02IHBIIN6DocLraVOZmo/bx213cKqAWzNar4c+pqnEzvAPlZb6lo3V6Yhhg/omOZw==
+  dependencies:
+    "@kikko-land/core" "^0.1.1"
+    "@kikko-land/sql" "^0.1.1"
+
+"@kikko-land/query-builder@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/query-builder/-/query-builder-0.1.1.tgz#a8c192ea07a4fdf1461f43bbaec837fa6b5d4db0"
+  integrity sha512-RvGbv3oG7xmSg/WgsHJuoywAeXzD/SPNTBLppdzW9NFWV9cr8yIWBH2B7zruey97BRKpS8PfIpWIIy23b28UYQ==
+  dependencies:
+    "@kikko-land/sql" "^0.1.1"
+
+"@kikko-land/react-queries-hooks@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/react-queries-hooks/-/react-queries-hooks-0.1.1.tgz#c258c18f06c39af3f02e7bbce21e3a07c37da938"
+  integrity sha512-uy9yTerM1pLs92TK0mwry8EuUAxftTzwcKFJX44ZVImjDNXCqBl9hVFdbQudlaNFDgenCoiaueBcJU0taFEisw==
+  dependencies:
+    "@kikko-land/core" "^0.1.1"
+    "@kikko-land/reactive-queries-plugin" "^0.1.1"
+    "@kikko-land/sql" "^0.1.1"
+    rxjs "^7.5.5"
+
+"@kikko-land/react@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/react/-/react-0.1.1.tgz#024cd551d6031d4cd2c5ad0e0a1f2083097c7f8d"
+  integrity sha512-5RXjcA3DsVSb4Dd7KxEmXdQHu9tuyFxSFeW+Ow20gmDUjVa5ddIbpvCsRbc47JRwLzs4fKafHt+4GB99uXbNVg==
+  dependencies:
+    "@kikko-land/core" "^0.1.1"
+    "@kikko-land/migrations-plugin" "^0.1.1"
+    "@kikko-land/react-queries-hooks" "^0.1.1"
+    "@kikko-land/reactive-queries-plugin" "^0.1.1"
+    "@kikko-land/sql" "^0.1.1"
+
+"@kikko-land/reactive-queries-plugin@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/reactive-queries-plugin/-/reactive-queries-plugin-0.1.1.tgz#ed43140c5d0661cb2d68af9da5ea2ea415b3087c"
+  integrity sha512-IfssQ3hDVzct6yk2ZI1Nj1jMp9hj6wfClNvNgjim0w+BX0Phy+TdDbvKep09Xw4hpzWF0qRMWuQkPy45BZGdTg==
+  dependencies:
+    "@kikko-land/core" "^0.1.1"
+    "@kikko-land/query-builder" "^0.1.1"
+    "@kikko-land/sql" "^0.1.1"
+    broadcast-channel "^4.13.0"
+    rxjs "^7.5.5"
+
+"@kikko-land/sql.js@^1.6.8":
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/@kikko-land/sql.js/-/sql.js-1.6.8.tgz#e388e11b7ec5b6c534e7e1474860e31f39ba3d58"
+  integrity sha512-2/8V69uMsqjjWCZlgT2lF9I9ImVzQjwd0MfWXNcswvYV6OPW4xQC2SMCfFzqAhHuLx0LW67ir9C7IIid/g/krA==
+
+"@kikko-land/sql@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/sql/-/sql-0.1.1.tgz#087a77d82c08874f629c6869f5913a0870abc1e2"
+  integrity sha512-5aQs8cNmsupJ6UXBfwWKuOBdjRYy6ZLppucSMbg8DeYUku43tRtKwEC4TJw1UqBQ5gv7Zu6MIwaABapSVCNLmA==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -1189,119 +1280,6 @@
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz#0c8b74c50f29ee44f423f7416829c0bf8bb5eb27"
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
-
-"@trong-orm/common-scripts@*":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/common-scripts/-/common-scripts-1.2.0.tgz#2c5bf93c8ec94c70ce404d684fa782ed70068bfe"
-  integrity sha512-zgVv+R2v9MSSUuoW2wVSP1Wc3Egb4rCoaECeRgT8w7Oh2DRedotjmC8kmLqUT0+tghsGELJOuxq0EUVN1myTfg==
-  dependencies:
-    "@typescript-eslint/eslint-plugin" "^5.30.5"
-    eslint "^8.19.0"
-    eslint-config-airbnb "^19.0.4"
-    eslint-config-prettier "^8.5.0"
-    eslint-config-react-app "^7.0.1"
-    eslint-plugin-flowtype "^8.0.3"
-    eslint-plugin-import "^2.26.0"
-    eslint-plugin-jsx-a11y "^6.6.0"
-    eslint-plugin-prettier "^4.0.0"
-    eslint-plugin-promise "^6.0.0"
-    eslint-plugin-react "^7.30.0"
-    eslint-plugin-react-hooks "^4.6.0"
-    eslint-plugin-rxjs "^5.0.2"
-    eslint-plugin-simple-import-sort "^7.0.0"
-    inquirer "^9.0.0"
-    rollup-plugin-auto-external "^2.0.0"
-    ts-node "^10.8.2"
-    typescript "^4.7.4"
-
-"@trong-orm/core@^1.1.6":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/core/-/core-1.2.0.tgz#5d512953bd154ad1c5dba7aab3574adec8098976"
-  integrity sha512-X85AL8TiowlLMS0PaOoh3M/Y4daoB4MbDLTZvEVWqU/VV1tIgJblv35YfPCav4nGlDqF1mDIH3iOcuG9Smqz9Q==
-  dependencies:
-    "@trong-orm/query-builder" "^1.2.0"
-    "@trong-orm/sql" "^1.2.0"
-    rxjs "^7.5.5"
-    ts-essentials "^9.1.2"
-
-"@trong-orm/core@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/core/-/core-1.2.1.tgz#578752b46806ab30f6d3a6698e62315161e16504"
-  integrity sha512-fhsQeMMu7u9WjrPB/zPFd9fw2ODMWx6Jj7o5t+dZRUu3NbsF2jUMVFn4FtilotUhHhJwUzTFUXwllIZzhbk1Yw==
-  dependencies:
-    "@trong-orm/query-builder" "^1.2.1"
-    "@trong-orm/sql" "^1.2.1"
-    rxjs "^7.5.5"
-    ts-essentials "^9.1.2"
-
-"@trong-orm/migrations-plugin@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/migrations-plugin/-/migrations-plugin-1.2.1.tgz#602d7e2bc079fc42120d61e8669dceeaa6f7fd21"
-  integrity sha512-LwTAWhfdt81Cq2khfSbiEzhGYC/cRvp8GBpYaaQn5WGa/gPO+S2dCViYqBQbrsuPQLVoFpqtHvfERJFmstxKoA==
-  dependencies:
-    "@trong-orm/core" "^1.2.1"
-    "@trong-orm/sql" "^1.2.1"
-
-"@trong-orm/query-builder@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/query-builder/-/query-builder-1.2.0.tgz#0b647bf8981c7972dadf133488d8de151f74a02a"
-  integrity sha512-N9aB2nCZCW1RZTXd69VaGDLQEIFxPiS7mmE04ekMSLQplHS6QI780eO9NeLtqQL8wgvs6Tizf9zD9NeFGIBuUQ==
-  dependencies:
-    "@trong-orm/sql" "^1.2.0"
-
-"@trong-orm/query-builder@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/query-builder/-/query-builder-1.2.1.tgz#60e1a6564c4a46a353a7949276209b2cfc14909d"
-  integrity sha512-QqR6cHNQ3d9qZDAD9H+gLYaUw1IVsvbIPZX/44dEc8kVUUm9f+y4aMHEiM+Yq8ly0BHndGGu4J7QJTLxwyNDbw==
-  dependencies:
-    "@trong-orm/sql" "^1.2.1"
-
-"@trong-orm/react-queries-hooks@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/react-queries-hooks/-/react-queries-hooks-1.2.1.tgz#cd658cb22be89afeee7c345286ff8ba7306bfd95"
-  integrity sha512-I8lZdKJq9ic3SH+wnOCo8vrDqLtD3goE5wxKtwUNFSPyjtd/0bj1Jh+JcTh6IKhd7S5autMFRdNAAsRMvD/isA==
-  dependencies:
-    "@trong-orm/core" "^1.2.1"
-    "@trong-orm/reactive-queries-plugin" "^1.2.1"
-    "@trong-orm/sql" "^1.2.1"
-    rxjs "^7.5.5"
-
-"@trong-orm/react@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/react/-/react-1.2.1.tgz#bcc61b150504f4d529cc656f3cd46a0aad1c3322"
-  integrity sha512-hsDGShddTufWKV43c6hckW++Uo1N5cDiHcVq4YFli9YgKQDB9Snfe3yvJ/BhOYGiChE2/u6vfrxyzLTcUwwRjg==
-  dependencies:
-    "@trong-orm/core" "^1.2.1"
-    "@trong-orm/migrations-plugin" "^1.2.1"
-    "@trong-orm/react-queries-hooks" "^1.2.1"
-    "@trong-orm/reactive-queries-plugin" "^1.2.1"
-    "@trong-orm/sql" "^1.2.1"
-
-"@trong-orm/reactive-queries-plugin@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/reactive-queries-plugin/-/reactive-queries-plugin-1.2.1.tgz#29e217bf43554554984fecc08350a90d4fe74b9e"
-  integrity sha512-HkuxwKN7Uedh0kGhb0Wehgz3au+YkQ8blPc2+EJpKUBqBlGgcpb3Z802SvM+w2BSPrZDwBqeap4PBbpBNmsUdQ==
-  dependencies:
-    "@trong-orm/core" "^1.2.1"
-    "@trong-orm/query-builder" "^1.2.1"
-    "@trong-orm/sql" "^1.2.1"
-    broadcast-channel "^4.13.0"
-    rxjs "^7.5.5"
-
-"@trong-orm/sql.js@^1.6.7":
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/@trong-orm/sql.js/-/sql.js-1.6.7.tgz#7586a7513f7bf2d48173876e630f0e083cfbc2c5"
-  integrity sha512-A9Yz/EdUPzic2c1vcOllwCh7RJ7otsBfp9xsEqvpByKyKUVTXZHSwfnRYSApmwL5ferRXlNcz9iAKMKnQjO6DQ==
-
-"@trong-orm/sql@^1.1.6", "@trong-orm/sql@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@trong-orm/sql/-/sql-1.2.0.tgz#cb9b6832562ffc57f2e131039798ae354a71bb41"
-  integrity sha512-BwLC7pQSL0C5hSprjUb90iv8tJU19MC5M+UkHnalDYUSLZ6vlkOftwpCvYSZsRN+ij6ghRk+vF+gGxIIMb2VzQ==
-
-"@trong-orm/sql@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@trong-orm/sql/-/sql-1.2.1.tgz#aff0d12e2d3f8efae97a80f8149c0644a9f1174b"
-  integrity sha512-D/SFC68RTvO2+vXWrc8Hc9p5p9SEspNc9nu3JGPo3M6ZpQzCwNgsFdLVIGdQY4ZoLSCS9wwkErEosBHMRqUoyg==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
@@ -3971,10 +3949,10 @@ rollup-plugin-typescript2@^0.32.1:
     resolve "^1.20.0"
     tslib "^2.4.0"
 
-rollup@^2.75.6, rollup@^2.76.0:
-  version "2.76.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.76.0.tgz#c69fe03db530ac53fcb9523b3caa0d3c0b9491a1"
-  integrity sha512-9jwRIEY1jOzKLj3nsY/yot41r19ITdQrhs+q3ggNWhr9TQgduHqANvPpS32RNpzGklJu3G1AJfvlZLi/6wFgWA==
+rollup@^2.75.6, rollup@^2.78.0:
+  version "2.78.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.78.0.tgz#00995deae70c0f712ea79ad904d5f6b033209d9e"
+  integrity sha512-4+YfbQC9QEVvKTanHhIAFVUFSRsezvQF8vFOJwtGfb9Bb+r014S+qryr9PSmw8x6sMnPkmFBGAvIFVQxvJxjtg==
   optionalDependencies:
     fsevents "~2.3.2"
 

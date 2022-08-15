@@ -1,4 +1,9 @@
-import { IDbBackend, IQuery, IQueryResult, IQueryValue } from "@trong-orm/core";
+import {
+  IDbBackend,
+  IQuery,
+  IQueryResult,
+  IQueryValue,
+} from "@kikko-land/core";
 import * as SQLite from "wa-sqlite";
 import SQLiteAsyncModule from "wa-sqlite/dist/wa-sqlite-async.mjs";
 

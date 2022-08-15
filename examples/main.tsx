@@ -1,4 +1,4 @@
-import { insert, select, update } from "@trong-orm/query-builder";
+import { insert, select, update } from "@kikko-land/query-builder";
 import {
   DbProvider,
   EnsureDbLoaded,
@@ -6,8 +6,8 @@ import {
   migrationsPlugin,
   reactiveQueriesPlugin,
   useDbStrict,
-} from "@trong-orm/react";
-import { runQuery, sql } from "@trong-orm/react";
+} from "@kikko-land/react";
+import { runQuery, sql } from "@kikko-land/react";
 import { chunk } from "lodash-es";
 import React, { useCallback } from "react";
 import ReactDOM from "react-dom/client";

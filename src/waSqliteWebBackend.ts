@@ -3,7 +3,7 @@ import {
   IQuery,
   IQueryResult,
   IQueryValue,
-} from "@kikko-land/core";
+} from "@kikko-land/kikko";
 import * as SQLite from "wa-sqlite";
 import SQLiteAsyncModule from "wa-sqlite/dist/wa-sqlite-async.mjs";
 

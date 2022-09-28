@@ -25,7 +25,7 @@ export const waSqliteWebBackend =
     cacheSize?: number;
     vfs?: "atomic" | "batch-atomic" | "minimal";
   }): IDbBackend =>
-  ({ dbName, stopped$ }) => {
+  ({ dbName }) => {
     let sqlite3: SQLiteAPI | undefined;
     let db: number | undefined;
 
@@ -70,13 +70,6 @@ export const waSqliteWebBackend =
         );
         await sqlite3.exec(db, `PRAGMA journal_mode=MEMORY;`);
         await sqlite3.exec(db, `PRAGMA temp_store=MEMORY;`);
-
-        // TODO: race condition on close may happen
-        stopped$.subscribe(() => {
-          if (sqlite3 && db !== undefined) {
-            void sqlite3.close(db);
-          }
-        });
       },
       async execQueries(
         queries: IQuery[],
@@ -165,6 +158,14 @@ export const waSqliteWebBackend =
         }
 
         return allResults;
+      },
+      async stop() {
+        if (sqlite3 && db !== undefined) {
+          await sqlite3.close(db);
+        }
+
+        sqlite3 = undefined;
+        db = undefined;
       },
     };
   };

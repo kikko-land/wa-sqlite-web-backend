@@ -1,13 +1,14 @@
-import { insert, select, update } from "@kikko-land/query-builder";
+import { insert, select, update } from "@kikko-land/boono";
 import {
   DbProvider,
+  DbsHolder,
   EnsureDbLoaded,
   makeId,
   migrationsPlugin,
   reactiveQueriesPlugin,
   useDbStrict,
 } from "@kikko-land/react";
-import { runQuery, sql } from "@kikko-land/react";
+import { sql } from "@kikko-land/react";
 import { chunk } from "lodash-es";
 import React, { useCallback } from "react";
 import ReactDOM from "react-dom/client";
@@ -25,8 +26,7 @@ const App = () => {
   const db = useDbStrict();
   const runInserts = useCallback(async () => {
     for (const chunkedRems of chunk(allRems, 10_000)) {
-      await runQuery(
-        db,
+      await db.runQuery(
         insert(
           chunkedRems.map((r) => ({ _id: r._id, doc: JSON.stringify(r) }))
         ).into("jsonRems")
@@ -35,8 +35,7 @@ const App = () => {
   }, [db]);
 
   const runUpdates = useCallback(async () => {
-    await runQuery(
-      db,
+    await db.runQuery(
       update("jsonRems").set({
         doc: sql`json_set(doc, '$.a', ${makeId()})`,
       })
@@ -45,8 +44,7 @@ const App = () => {
 
   const runSelects = useCallback(async () => {
     (
-      await runQuery<{ _id: string; doc: string }>(
-        db,
+      await db.runQuery<{ _id: string; doc: string }>(
         select()
           .withRecursive({
             table: "descendantRems",
@@ -92,8 +90,7 @@ const config = {
       migrations: [
         {
           up: async (db) => {
-            await runQuery(
-              db,
+            await db.runQuery(
               sql`
                 CREATE TABLE IF NOT EXISTS jsonRems (
                   _id TEXT NOT NULL PRIMARY KEY,
@@ -102,7 +99,7 @@ const config = {
                   `
             );
 
-            await runQuery(db, sql`CREATE INDEX jsonRems_id ON jsonRems(_id);`);
+            await db.runQuery(sql`CREATE INDEX jsonRems_id ON jsonRems(_id);`);
           },
           id: 1000,
           name: "createRemJson",
@@ -114,9 +111,9 @@ const config = {
 };
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <DbProvider config={config}>
+  <DbsHolder defaultDbConfig={config}>
     <EnsureDbLoaded fallback={<div>Loading db...</div>}>
       <App />
     </EnsureDbLoaded>
-  </DbProvider>
+  </DbsHolder>
 );

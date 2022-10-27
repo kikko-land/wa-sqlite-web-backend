@@ -1,5 +1,6 @@
 import {
   IDbBackend,
+  IExecQueriesResult,
   IQuery,
   IQueryResult,
   IQueryValue,
@@ -10,8 +11,6 @@ import SQLiteAsyncModule from "wa-sqlite/dist/wa-sqlite-async.mjs";
 import { IDBAtomicVFS } from "./IDBAtomicVFS";
 import { IDBBatchAtomicVFS } from "./IDBBatchAtomicVFS";
 import { IDCachedWritesVFS } from "./IDBCachedWritesVFS";
-
-const colors = ["yellow", "cyan", "magenta"];
 
 export const waSqliteWebBackend =
   ({
@@ -30,9 +29,6 @@ export const waSqliteWebBackend =
     let db: number | undefined;
 
     const vfs = _vfs ? _vfs : "minimal";
-
-    let currentTransactionI = 0;
-    let currentTransactionId: string | undefined;
 
     return {
       async initialize() {
@@ -73,20 +69,13 @@ export const waSqliteWebBackend =
       },
       async execQueries(
         queries: IQuery[],
-        opts: {
-          log: {
-            suppress: boolean;
-            transactionId?: string;
-          };
-        }
-      ): Promise<IQueryResult[]> {
-        const logOpts = opts.log;
-
+      ) {
         if (!sqlite3 || db === undefined) {
           throw new Error("DB is not initialized");
         }
+        const totalStartedAt = performance.now();
 
-        const allResults: IQueryResult[] = [];
+        const result: IExecQueriesResult["result"] = [];
 
         for (const q of queries) {
           const rows: IQueryResult = [];
@@ -118,46 +107,27 @@ export const waSqliteWebBackend =
               );
             }
           }
-
           sqlite3.str_finish(str);
           await sqlite3.finalize(prepare.stmt);
 
-          allResults.push(rows);
+          const endTime = performance.now();
 
-          const end = performance.now();
-
-          if (!opts.log.suppress) {
-            if (
-              logOpts?.transactionId &&
-              logOpts.transactionId !== currentTransactionId &&
-              !logOpts.suppress
-            ) {
-              currentTransactionId = logOpts.transactionId;
-              currentTransactionI++;
-            }
-            if (!logOpts?.transactionId) {
-              currentTransactionId = undefined;
-            }
-
-            console.log(
-              `%c[${dbName}]${
-                logOpts?.transactionId
-                  ? `[tr_id=${logOpts.transactionId.substring(0, 6)}]`
-                  : ""
-              } ${q.text} ${JSON.stringify(q.values)} Time: ${(
-                (end - startTime) /
-                1000
-              ).toFixed(4)}`,
-              `color: ${
-                currentTransactionI
-                  ? colors[currentTransactionI % colors.length]
-                  : "white"
-              }`
-            );
-          }
+          result.push({
+            rows,
+            performance: {
+              execTime: endTime - startTime,
+            },
+          });
         }
+        
+        const totalFinishedAt = performance.now();
 
-        return allResults;
+        return Promise.resolve({
+          result,
+          performance: {
+            totalTime: totalFinishedAt - totalStartedAt,
+          },
+        });
       },
       async stop() {
         if (sqlite3 && db !== undefined) {

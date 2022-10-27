@@ -1,6 +1,6 @@
 {
   "name": "@kikko-land/wa-sqlite-web-backend",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Sergey Popov",
   "license": "GPL-3.0",
   "main": "./src/index.ts",
@@ -33,21 +33,20 @@
     "check-typing": "tsc --noEmit"
   },
   "dependencies": {
-    "@kikko-land/kikko": "^0.4.0",
-    "@kikko-land/sql": "^0.2.0",
+    "@kikko-land/kikko": "^0.6.1",
+    "@kikko-land/boono-sql": "^0.3.0",
     "@kikko-land/sql.js": "^1.6.8",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rxjs": "^7.5.5",
     "wa-sqlite": "rhashimoto/wa-sqlite#buildless"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "@kikko-land/common-scripts": "^0.1.1",
-    "@kikko-land/query-builder": "^0.1.1",
-    "@kikko-land/react": "^0.2.0",
+    "@kikko-land/common-scripts": "^0.4.0",
+    "@kikko-land/boono": "^0.2.1",
+    "@kikko-land/react": "^0.6.1",
     "@types/emscripten": "^1.39.6",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.15",

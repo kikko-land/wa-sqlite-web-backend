@@ -426,7 +426,6 @@ export class IDBAtomicVFS extends VFS.Base {
           const idb = await db.dbReady;
 
           await new Promise<void>((resolve, reject) => {
-            // @ts-expect-error lib dom misses third argument
             const tx = idb.transaction("blocks", "readwrite", {
               durability: "relaxed",
             });

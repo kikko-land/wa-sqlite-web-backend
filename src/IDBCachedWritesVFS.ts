@@ -240,7 +240,6 @@ export class IDCachedWritesVFS extends VFS.Base {
 
           const tx =
             db.tx ||
-            // @ts-expect-error lib dom misses third argument
             idb.transaction("blocks", "readwrite", {
               durability: "relaxed",
             });
@@ -540,7 +539,6 @@ export class IDCachedWritesVFS extends VFS.Base {
         const idb = await db.dbReady;
 
         await new Promise<void>((resolve, reject) => {
-          // @ts-expect-error lib dom misses third argument
           const tx = idb.transaction("blocks", "readwrite", {
             durability: "relaxed",
           });

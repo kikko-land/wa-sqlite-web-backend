@@ -1328,10 +1328,19 @@
     ts-node "^10.9.1"
     typescript "^4.8.4"
 
-"@kikko-land/kikko@^0.6.0", "@kikko-land/kikko@^0.6.1":
+"@kikko-land/kikko@^0.6.0":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.6.1.tgz#f8355d98ff8c61607e25b5858bbeb01992841ada"
   integrity sha512-hLxvUF8rl9WJ/4RXLH+u07P73iXaklcuiEbmKbqnRQQi0j0s6f6LV1xgYtETUAZdYIEBv4+XIVm04gk3eN50oA==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    lodash.isequal "^4.5.0"
+    ts-essentials "^9.3.0"
+
+"@kikko-land/kikko@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.7.0.tgz#90b09ad5bdd9127d922c44d7bbb2656563c7e629"
+  integrity sha512-5j16HXCBRHpafZ5VjdCej+BCtbK/Sgg4gP1KY8o56rAtritRMT1hYJJRHwC0WVkMTKM1TESTyfvI8LWinoHKIg==
   dependencies:
     "@kikko-land/boono-sql" "^0.3.0"
     lodash.isequal "^4.5.0"

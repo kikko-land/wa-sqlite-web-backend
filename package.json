@@ -34,7 +34,7 @@
     "check-typing": "tsc --noEmit"
   },
   "dependencies": {
-    "@kikko-land/kikko": "^0.6.1",
+    "@kikko-land/kikko": "^0.7.0",
     "@kikko-land/boono-sql": "^0.3.0",
     "@kikko-land/sql.js": "^1.6.8",
     "patch-package": "^6.5.0",

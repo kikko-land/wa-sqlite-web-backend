@@ -1328,50 +1328,50 @@
     ts-node "^10.9.1"
     typescript "^4.8.4"
 
-"@kikko-land/kikko@^0.6.0", "@kikko-land/kikko@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.6.1.tgz#f8355d98ff8c61607e25b5858bbeb01992841ada"
-  integrity sha512-hLxvUF8rl9WJ/4RXLH+u07P73iXaklcuiEbmKbqnRQQi0j0s6f6LV1xgYtETUAZdYIEBv4+XIVm04gk3eN50oA==
+"@kikko-land/kikko@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.8.0.tgz#9805367fb96b5b5f2ce0a58329c6053696611ece"
+  integrity sha512-Mnmv8Pn1yJjNKcnkphxB5vQ6yJtHs9euo3t8ns4aXvLn8jMSkiXYjEGtEBGCC5ARvNFOAb1MRc+n0HQ5zWIe/Q==
   dependencies:
     "@kikko-land/boono-sql" "^0.3.0"
-    lodash.isequal "^4.5.0"
+    fast-equals "^4.0.3"
     ts-essentials "^9.3.0"
 
-"@kikko-land/migrations-plugin@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@kikko-land/migrations-plugin/-/migrations-plugin-0.5.1.tgz#dc65a23f482afcdc0848ff5a11876d129889e582"
-  integrity sha512-eYlAOBl1XvugBZmFf7jdJUhhpVH2jEn0VqQ9nmj572XkMKcJPJwdtbpyOxI8dh+XuGD4yVZajitI274uKryYNA==
-  dependencies:
-    "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.6.0"
-
-"@kikko-land/react-queries-hooks@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@kikko-land/react-queries-hooks/-/react-queries-hooks-0.7.1.tgz#9505eac1789ebb0d76e221ce78ceaf80322e01e4"
-  integrity sha512-g6MoBpLc1h6UbvS2q5YfrgLWd1gjNd491TLU3GHDKB+YZJA9fRry33pzxMmp3vRlJI+7Oz+ivuQiXocnZW7XOQ==
-  dependencies:
-    "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.6.0"
-    "@kikko-land/reactive-queries-plugin" "^0.5.1"
-
-"@kikko-land/react@^0.6.1":
+"@kikko-land/migrations-plugin@^0.6.1":
   version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@kikko-land/react/-/react-0.6.1.tgz#3a11a84e43f23251103d1b2b95d8ea21f5ee5eb6"
-  integrity sha512-GIQvmGiWLAxC+RrTVLJcbS/l5H+Ny2u2F9xRvuKTCLeeJkR4g4y3gm16iXTsaDtk57K1oVkTb2gBD+8Qb6WXwQ==
+  resolved "https://registry.yarnpkg.com/@kikko-land/migrations-plugin/-/migrations-plugin-0.6.1.tgz#09e77d43d0be1d069d6a5907527b296de3a107ad"
+  integrity sha512-l3CYZiUgRH0fsXlxrrC1fAEm3BZBMC5ZaiZ+pHrAYg0ZXwft6zvsueHQ+S0JEJl1slHurR881hbSs3b1Vg2s9w==
   dependencies:
     "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.6.0"
-    "@kikko-land/migrations-plugin" "^0.5.1"
-    "@kikko-land/react-queries-hooks" "^0.7.1"
-    "@kikko-land/reactive-queries-plugin" "^0.5.1"
+    "@kikko-land/kikko" "^0.8.0"
 
-"@kikko-land/reactive-queries-plugin@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@kikko-land/reactive-queries-plugin/-/reactive-queries-plugin-0.5.1.tgz#61584d4b9845103d1b90e6c0c76b7e0c4a7341e8"
-  integrity sha512-3/sNq6B+MR/WOnfqxU6hPvqefkO+vnBIAn1hGEYCHumdk+O9JjGawM150vKMbua0sWYlsNBFCWva3TEPu4cjnQ==
+"@kikko-land/react-queries-hooks@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@kikko-land/react-queries-hooks/-/react-queries-hooks-0.9.0.tgz#2eb7c04b4a7d5440d5b1e864fd2c338b8d1d0e58"
+  integrity sha512-HjGoaZ45h+f/1XelWBs9ykdyVtga+1MHuKN93fX1141wNI6P/+9XfbGl6jMOeHUarGzcBbsrF01B6SQRAvcXSg==
   dependencies:
     "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.6.0"
+    "@kikko-land/kikko" "^0.8.0"
+    "@kikko-land/reactive-queries-plugin" "^0.7.0"
+
+"@kikko-land/react@^0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@kikko-land/react/-/react-0.6.3.tgz#dc261e8eba83a327b5b7f1adeb3b59c785e1c4e5"
+  integrity sha512-RT55W+HC7dNBGg0dVk+4i7YJxyBHjIZcqZeRbBpgaYDlXGyMug5WGbvL0sTei83l4fS/A/qQEXJT7rpUkO+/tw==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    "@kikko-land/kikko" "^0.8.0"
+    "@kikko-land/migrations-plugin" "^0.6.1"
+    "@kikko-land/react-queries-hooks" "^0.9.0"
+    "@kikko-land/reactive-queries-plugin" "^0.7.0"
+
+"@kikko-land/reactive-queries-plugin@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@kikko-land/reactive-queries-plugin/-/reactive-queries-plugin-0.7.0.tgz#c9c8321ead44b4321661b18fd8450e6dc1285af4"
+  integrity sha512-v1v88FSh0e9N9NEbefshZULjxkcb5X/4dSr4Zf2WrmaKUAc1e1iIcTOBNLX1Chnkz/ARD56wV9xV5q3uKRXX9A==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    "@kikko-land/kikko" "^0.8.0"
     broadcast-channel "^4.18.0"
 
 "@kikko-land/sql.js@^1.6.8":
@@ -1512,10 +1512,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.0.24":
-  version "18.0.24"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.24.tgz#2f79ed5b27f08d05107aab45c17919754cc44c20"
-  integrity sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==
+"@types/react@^18.0.25":
+  version "18.0.25"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.25.tgz#8b1dcd7e56fe7315535a4af25435e0bb55c8ae44"
+  integrity sha512-xD6c0KDT4m7n9uD4ZHi02lzskaiqcBxf4zi+tXZY98a04wvc0hi/TcCPC2FOESZi51Nd7tlUeOJY8RofL799/g==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2785,6 +2785,11 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
   integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
+fast-equals@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/fast-equals/-/fast-equals-4.0.3.tgz#72884cc805ec3c6679b99875f6b7654f39f0e8c7"
+  integrity sha512-G3BSX9cfKttjr+2o1O22tYMLq0DPluZnYtq1rXumE1SpL/F/SLIfHx08WYQoWSIpeMYf8sRbJ8++71+v6Pnxfg==
+
 fast-glob@^3.2.9:
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
@@ -3438,11 +3443,6 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
-
 lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
@@ -3876,6 +3876,11 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
+prettier@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
+  integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
+
 prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
@@ -4087,10 +4092,10 @@ rollup@^2.79.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rollup@^3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.2.3.tgz#67d894c981ad50cc811779748e52c05742560c64"
-  integrity sha512-qfadtkY5kl0F5e4dXVdj2D+GtOdifasXHFMiL1SMf9ADQDv5Eti6xReef9FKj+iQPR2pvtqWna57s/PjARY4fg==
+rollup@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.2.5.tgz#9452168ac083218c8212bf53d2448bdc6b8b0de7"
+  integrity sha512-/Ha7HhVVofduy+RKWOQJrxe4Qb3xyZo+chcpYiD8SoQa4AG7llhupUtyfKSSrdBM2mWJjhM8wZwmbY23NmlIYw==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -4415,6 +4420,11 @@ tslib@^2.1.0, tslib@^2.4.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
+tslib@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
+  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+
 tsutils@^3.21.0:
   version "3.21.0"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.21.0.tgz#b48717d394cea6c1e096983eed58e9d61715b623"
@@ -4528,10 +4538,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vite@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.0.tgz#a4015914620ff0122ea57fddfecc0e250eb6582c"
-  integrity sha512-Ovj7+cqIdM1I0LPCk2CWxzgADXMix3NLXpUT6g7P7zg/a9grk/TaC3qn9YMg7w7M0POIVCBOp1aBANJW+RH7oA==
+vite@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.2.tgz#280762bfaf47bcea1d12698427331c0009ac7c1f"
+  integrity sha512-pLrhatFFOWO9kS19bQ658CnRYzv0WLbsPih6R+iFeEEhDOuYgYCX2rztUViMz/uy/V8cLCJvLFeiOK7RJEzHcw==
   dependencies:
     esbuild "^0.15.9"
     postcss "^8.4.18"

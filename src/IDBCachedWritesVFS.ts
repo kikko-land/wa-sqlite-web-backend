@@ -70,6 +70,7 @@ export class IDCachedWritesVFS extends VFS.Base {
           path: url.pathname,
           flags,
           block0: await (async () => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const res = await db.run("readonly", ({ blocks }) =>
               blocks.get(this.bound(0))
             );
@@ -94,6 +95,7 @@ export class IDCachedWritesVFS extends VFS.Base {
                 throw new Error(`file not found: ${name}`);
               }
             } else {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-return
               return res;
             }
           })(),
@@ -255,7 +257,8 @@ export class IDCachedWritesVFS extends VFS.Base {
           // console.warn("OPEN CURSOR", -iOffset, dir);
 
           req.onsuccess = (e) => {
-            let cursor: IDBCursorWithValue = (e.target as any).result;
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            const cursor: IDBCursorWithValue = (e.target as any).result;
             this.cursors.set(fileId, cursor);
 
             const promise = this.cursorPromises.get(fileId);
@@ -263,6 +266,7 @@ export class IDCachedWritesVFS extends VFS.Base {
             if (!promise)
               throw new Error("Got data from cursor but nothing is waiting it");
 
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             promise.resolve(cursor ? cursor.value : null);
             this.cursorPromises.delete(fileId);
           };
@@ -292,6 +296,7 @@ export class IDCachedWritesVFS extends VFS.Base {
       }
 
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const block: IBlock = await db.run("readonly", ({ blocks }) => {
           return blocks.get(this.bound(-iOffset));
         });
@@ -345,7 +350,7 @@ export class IDCachedWritesVFS extends VFS.Base {
     // configurable so the user can change them per-browser if needed,
     // as well as fine-tuning them for their usage of sqlite.
 
-    let prevReads = this.prevReads.get(fileId);
+    const prevReads = this.prevReads.get(fileId);
     if (prevReads) {
       // Has there been 3 forward sequential reads within 10 blocks?
       if (
@@ -504,6 +509,7 @@ export class IDCachedWritesVFS extends VFS.Base {
         if (result === VFS.SQLITE_OK && flags === VFS.SQLITE_LOCK_SHARED) {
           // console.log(file.block0);
           // Update block 0 in case another connection changed it.
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           file.block0 = await db.run("readonly", ({ blocks }) =>
             blocks.get(this.bound(0))
           );

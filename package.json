@@ -1,6 +1,6 @@
 {
   "name": "@kikko-land/wa-sqlite-web-backend",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "Sergey Popov",
   "license": "GPL-3.0",
   "main": "./src/index.ts",
@@ -37,6 +37,7 @@
     "@kikko-land/boono-sql": "^0.3.0",
     "@kikko-land/kikko": "^0.8.0",
     "@kikko-land/sql.js": "^1.6.8",
+    "await-lock": "^2.2.2",
     "wa-sqlite": "rhashimoto/wa-sqlite#buildless"
   },
   "devDependencies": {

@@ -9,6 +9,7 @@ import {
   ITransactionOpts,
   releaseTrJobIfPossible,
 } from "@kikko-land/kikko";
+import AwaitLock from "await-lock";
 import * as SQLite from "wa-sqlite";
 import SQLiteAsyncModule from "wa-sqlite/dist/wa-sqlite-async.mjs";
 
@@ -35,6 +36,8 @@ export const waSqliteWebBackend =
     const vfs = _vfs ? _vfs : "minimal";
 
     const jobsState = initJobsState();
+
+    const allQueriesLock = new AwaitLock();
 
     return {
       async initialize() {
@@ -80,6 +83,7 @@ export const waSqliteWebBackend =
         }
         const startBlockAt = performance.now();
         const job = await acquireWithTrJobOrWait(jobsState, transactionOpts);
+        await allQueriesLock.acquireAsync();
         const endBlockAt = performance.now();
         const blockTime = endBlockAt - startBlockAt;
 
@@ -154,6 +158,7 @@ export const waSqliteWebBackend =
 
           throw e;
         } finally {
+          allQueriesLock.release();
           releaseTrJobIfPossible(jobsState, job, transactionOpts);
         }
       },

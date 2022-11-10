@@ -1,6 +1,6 @@
 {
   "name": "@kikko-land/wa-sqlite-web-backend",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "Sergey Popov",
   "license": "GPL-3.0",
   "main": "./src/index.ts",
@@ -9,10 +9,16 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts"
+      "types": "./dist/src/index.d.ts",
+      "es2015": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/src/index.d.ts",
   "publishConfig": {
     "exports": {
       ".": {

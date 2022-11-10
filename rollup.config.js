@@ -1,5 +1,6 @@
 import typescript from "rollup-plugin-typescript2";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
+import commonjs from '@rollup/plugin-commonjs';
 
 function getConfig(entry, filename) {
   return {
@@ -10,9 +11,16 @@ function getConfig(entry, filename) {
     external: [
       "wa-sqlite",
       "wa-sqlite/src/VFS.js",
-      "wa-sqlite/dist/wa-sqlite-async.mjs",
+      "wa-sqlite/dist/wa-sqlite-async.mjs"
     ],
-    plugins: [nodeResolve(), typescript({})],
+    plugins: [
+      nodeResolve(),
+      typescript({}),
+      commonjs({
+        include: /node_modules/,
+        requireReturnsDefault: 'auto', // <---- this solves default issue
+      }),
+    ],
   };
 }
 

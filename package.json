@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@kikko-land/boono-sql": "^0.3.0",
-    "@kikko-land/kikko": "^0.8.0",
+    "@kikko-land/kikko": "^0.9.0",
     "@kikko-land/sql.js": "^1.6.8",
     "wa-sqlite": "rhashimoto/wa-sqlite#buildless"
   },

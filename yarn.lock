@@ -1337,6 +1337,15 @@
     fast-equals "^4.0.3"
     ts-essentials "^9.3.0"
 
+"@kikko-land/kikko@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.9.0.tgz#ac08063e4d5e40e5a10a6b4d186efc3df2ad62d7"
+  integrity sha512-GxuOhtrLiCGX/UD7T9DBSN6+1MVj4EweAgPb6YIZh2NrumNdPHouQlSyRMh4UzCokZ8IC/G8ODglqn1xASEHIQ==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    fast-equals "^4.0.3"
+    ts-essentials "^9.3.0"
+
 "@kikko-land/migrations-plugin@^0.6.1":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@kikko-land/migrations-plugin/-/migrations-plugin-0.6.1.tgz#09e77d43d0be1d069d6a5907527b296de3a107ad"

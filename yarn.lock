@@ -4600,8 +4600,9 @@ vite@^3.2.2:
     fsevents "~2.3.2"
 
 wa-sqlite@rhashimoto/wa-sqlite#buildless:
-  version "0.8.1"
-  resolved "https://codeload.github.com/rhashimoto/wa-sqlite/tar.gz/92203cfe4ac9be205dec6341ad79e303cbe3d953"
+  version "0.8.3"
+  uid "48c2528dae6466fd1847789891642be6f8274403"
+  resolved "https://codeload.github.com/rhashimoto/wa-sqlite/tar.gz/48c2528dae6466fd1847789891642be6f8274403"
 
 wcwidth@^1.0.1:
   version "1.0.1"

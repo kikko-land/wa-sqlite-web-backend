@@ -1328,6 +1328,15 @@
     ts-node "^10.9.1"
     typescript "^4.8.4"
 
+"@kikko-land/kikko@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.11.0.tgz#2a68efd404a57bf600fe7cf1d352f96b1d20755d"
+  integrity sha512-qlWIWEPP9ygJTB8wjx39MTYLuivP9L2oWnevrXyT/iQBr0cfmxskwlIQsD/dh1JN3B5lUNPbVIoTGJ5wdX5o/w==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    fast-equals "^4.0.3"
+    ts-essentials "^9.3.0"
+
 "@kikko-land/kikko@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@kikko-land/kikko/-/kikko-0.8.0.tgz#9805367fb96b5b5f2ce0a58329c6053696611ece"
@@ -1337,41 +1346,41 @@
     fast-equals "^4.0.3"
     ts-essentials "^9.3.0"
 
-"@kikko-land/migrations-plugin@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@kikko-land/migrations-plugin/-/migrations-plugin-0.6.1.tgz#09e77d43d0be1d069d6a5907527b296de3a107ad"
-  integrity sha512-l3CYZiUgRH0fsXlxrrC1fAEm3BZBMC5ZaiZ+pHrAYg0ZXwft6zvsueHQ+S0JEJl1slHurR881hbSs3b1Vg2s9w==
+"@kikko-land/migrations-plugin@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/migrations-plugin/-/migrations-plugin-0.7.1.tgz#516738bbdf7fe08bb5ce210d15f0001672bfd903"
+  integrity sha512-V/RbBBvx0fFCPrRqQnkQoKJ3LC18SliNlms3ebJPuKbFBpTynSLP/GWEegvyOtMj1l9Wc5HaUylKlpufbt0Q0w==
   dependencies:
     "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.8.0"
+    "@kikko-land/kikko" "^0.11.0"
 
-"@kikko-land/react-queries-hooks@^0.9.0":
+"@kikko-land/react-queries-hooks@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/react-queries-hooks/-/react-queries-hooks-0.10.1.tgz#a030dfa27ef28d7e3ce452e230b12ed33fb5ff62"
+  integrity sha512-E7JqJyIw220I86OR4R3+zRNNCphkYamHbpuEr0AnFjnWiegyM4qP+HfznSMbPvGnylWTFyNpkwamw2wZyxo8Og==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    "@kikko-land/kikko" "^0.11.0"
+    "@kikko-land/reactive-queries-plugin" "^0.9.0"
+
+"@kikko-land/react@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@kikko-land/react/-/react-0.7.1.tgz#701f80d2e2fc1f7133c353098b25e00b174dd750"
+  integrity sha512-B5t5cptJUA421zauQTgq4JDvr+588zt0A2z5STTkR8KPrtRoNR/ur/E0HWHagYKBeaFK0PShOjU+1gS7Aj3hGw==
+  dependencies:
+    "@kikko-land/boono-sql" "^0.3.0"
+    "@kikko-land/kikko" "^0.11.0"
+    "@kikko-land/migrations-plugin" "^0.7.1"
+    "@kikko-land/react-queries-hooks" "^0.10.1"
+    "@kikko-land/reactive-queries-plugin" "^0.9.0"
+
+"@kikko-land/reactive-queries-plugin@^0.9.0":
   version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@kikko-land/react-queries-hooks/-/react-queries-hooks-0.9.0.tgz#2eb7c04b4a7d5440d5b1e864fd2c338b8d1d0e58"
-  integrity sha512-HjGoaZ45h+f/1XelWBs9ykdyVtga+1MHuKN93fX1141wNI6P/+9XfbGl6jMOeHUarGzcBbsrF01B6SQRAvcXSg==
+  resolved "https://registry.yarnpkg.com/@kikko-land/reactive-queries-plugin/-/reactive-queries-plugin-0.9.0.tgz#81d5f6bd28c7d46564a8a4d66d0259aeafb53ca2"
+  integrity sha512-syABpE4HJohzRPsYeEO0jyLeATl4hcGu+I2dZVlXAtdG7ty2C+YpVrLmWa/h9RZi5E7JuFeqODWg79pWshdxnQ==
   dependencies:
     "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.8.0"
-    "@kikko-land/reactive-queries-plugin" "^0.7.0"
-
-"@kikko-land/react@^0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@kikko-land/react/-/react-0.6.3.tgz#dc261e8eba83a327b5b7f1adeb3b59c785e1c4e5"
-  integrity sha512-RT55W+HC7dNBGg0dVk+4i7YJxyBHjIZcqZeRbBpgaYDlXGyMug5WGbvL0sTei83l4fS/A/qQEXJT7rpUkO+/tw==
-  dependencies:
-    "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.8.0"
-    "@kikko-land/migrations-plugin" "^0.6.1"
-    "@kikko-land/react-queries-hooks" "^0.9.0"
-    "@kikko-land/reactive-queries-plugin" "^0.7.0"
-
-"@kikko-land/reactive-queries-plugin@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@kikko-land/reactive-queries-plugin/-/reactive-queries-plugin-0.7.0.tgz#c9c8321ead44b4321661b18fd8450e6dc1285af4"
-  integrity sha512-v1v88FSh0e9N9NEbefshZULjxkcb5X/4dSr4Zf2WrmaKUAc1e1iIcTOBNLX1Chnkz/ARD56wV9xV5q3uKRXX9A==
-  dependencies:
-    "@kikko-land/boono-sql" "^0.3.0"
-    "@kikko-land/kikko" "^0.8.0"
+    "@kikko-land/kikko" "^0.11.0"
     broadcast-channel "^4.18.0"
 
 "@kikko-land/sql.js@^1.6.8":

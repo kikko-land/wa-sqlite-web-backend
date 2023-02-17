@@ -4141,10 +4141,10 @@ rollup@^2.79.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rollup@^3.2.5:
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.2.5.tgz#9452168ac083218c8212bf53d2448bdc6b8b0de7"
-  integrity sha512-/Ha7HhVVofduy+RKWOQJrxe4Qb3xyZo+chcpYiD8SoQa4AG7llhupUtyfKSSrdBM2mWJjhM8wZwmbY23NmlIYw==
+rollup@^3.16.0:
+  version "3.16.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.16.0.tgz#2ca49e0f8015dda814f2cb93015775e58134611b"
+  integrity sha512-9wE1H5N1SJqnROpQanBGJ7lrIitwlUYGj4Va4eyf3+vNhoIHLPLag2/CUGIiq3V9lHOBJB6zTsGsPvc50oeihg==
   optionalDependencies:
     fsevents "~2.3.2"
 
